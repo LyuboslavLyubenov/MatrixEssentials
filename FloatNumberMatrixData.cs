@@ -48,7 +48,7 @@ namespace MatrixEssentials
         {
             if (value is FloatNumberMatrixData floatNumberData)
             {
-                var result = this.InternalValue * (float) floatNumberData.InternalValue;
+                var result = this.InternalValue / (float) floatNumberData.InternalValue;
                 return new FloatNumberMatrixData(result);
             }
 
