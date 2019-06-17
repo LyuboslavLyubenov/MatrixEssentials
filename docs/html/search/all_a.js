@@ -1,0 +1,17 @@
+var searchData=
+[
+  ['rawvalue',['RawValue',['../d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html#a299fbe800768ec869a854f8cb17b0ee5',1,'MatrixEssentials.FloatNumberMatrixData.RawValue()'],['../da/d9c/interfaceMatrixEssentials_1_1IMatrixData.html#ad9118220f276059b9d2d642dd7773bdc',1,'MatrixEssentials.IMatrixData.RawValue()'],['../dd/d05/classMatrixEssentialsTests_1_1UnknownMatrixDataType.html#adbedde28cf245d2edf970956d334e7f0',1,'MatrixEssentialsTests.UnknownMatrixDataType.RawValue()'],['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html#a5aaa40dd4d4d0733179dc3bb08d04a08',1,'MatrixEssentials.RGBMatrixData.RawValue()']]],
+  ['rawvalueisequaltointernalvalue',['RawValueIsEqualToInternalValue',['../d7/d6c/classMatrixEssentialsTests_1_1FloatMatrixDataTests.html#adbacaa27d8a9c55e0448bbb55f2bd407',1,'MatrixEssentialsTests::FloatMatrixDataTests']]],
+  ['rawvalues',['RawValues',['../d2/d9f/interfaceMatrixEssentials_1_1IMatrix.html#aaf14e0e6615a18132e62654679cc7e3e',1,'MatrixEssentials.IMatrix.RawValues()'],['../de/d93/classMatrixEssentials_1_1Matrix.html#a3b3af5d3584e9175191d06862d335ade',1,'MatrixEssentials.Matrix.RawValues()']]],
+  ['readme_2emd',['README.md',['../da/ddd/README_8md.html',1,'']]],
+  ['red',['Red',['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html#adb5f22c997a703f8194d80fe2ca38e1d',1,'MatrixEssentials::RGBMatrixData']]],
+  ['returningcorrectresultwhenaddwithfloatnumbermatrixdata',['ReturningCorrectResultWhenAddWithFloatNumberMatrixData',['../d7/d6c/classMatrixEssentialsTests_1_1FloatMatrixDataTests.html#aaea8725c6653bcbb19a95533f7b7b7aa',1,'MatrixEssentialsTests::FloatMatrixDataTests']]],
+  ['returningcorrectresultwhendividewithfloatnumbermatrixdata',['ReturningCorrectResultWhenDivideWithFloatNumberMatrixData',['../d7/d6c/classMatrixEssentialsTests_1_1FloatMatrixDataTests.html#af3ab8ddc5246ee4cff1ac3a3f3facca4',1,'MatrixEssentialsTests::FloatMatrixDataTests']]],
+  ['returningcorrectresultwhenmultiplybywithfloatnumbermatrixdata',['ReturningCorrectResultWhenMultiplyByWithFloatNumberMatrixData',['../d7/d6c/classMatrixEssentialsTests_1_1FloatMatrixDataTests.html#a9813c60263197a7787655f04fd90a5f1',1,'MatrixEssentialsTests::FloatMatrixDataTests']]],
+  ['rgbmatrix',['RGBMatrix',['../d4/d83/classMatrixEssentials_1_1RGBMatrix.html',1,'MatrixEssentials.RGBMatrix'],['../d4/d83/classMatrixEssentials_1_1RGBMatrix.html#abec67cdb6b98b2a3b3d041ad368775d5',1,'MatrixEssentials.RGBMatrix.RGBMatrix(IList&lt; IList&lt; IMatrixData &gt;&gt; matrix)'],['../d4/d83/classMatrixEssentials_1_1RGBMatrix.html#a4c7a3345b06b814588a45554b9599f9a',1,'MatrixEssentials.RGBMatrix.RGBMatrix(int width, int height)']]],
+  ['rgbmatrix_2ecs',['RGBMatrix.cs',['../da/dc2/RGBMatrix_8cs.html',1,'']]],
+  ['rgbmatrixdata',['RGBMatrixData',['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html',1,'MatrixEssentials.RGBMatrixData'],['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html#a1e1fe370fac5c6aa1cf43f945283a568',1,'MatrixEssentials.RGBMatrixData.RGBMatrixData()'],['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html#a77cc2b327955c0e00456fef3ea3f36ed',1,'MatrixEssentials.RGBMatrixData.RGBMatrixData(int red, int green, int blue)']]],
+  ['rgbmatrixdata_2ecs',['RGBMatrixData.cs',['../d3/de8/RGBMatrixData_8cs.html',1,'']]],
+  ['rgbmatrixdatatests',['RGBMatrixDataTests',['../dd/d88/classMatrixEssentialsTests_1_1RGBMatrixDataTests.html',1,'MatrixEssentialsTests']]],
+  ['rgbmatrixdatatests_2ecs',['RGBMatrixDataTests.cs',['../da/da0/RGBMatrixDataTests_8cs.html',1,'']]]
+];
