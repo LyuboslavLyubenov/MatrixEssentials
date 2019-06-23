@@ -40,6 +40,16 @@ namespace MatrixEssentialsTests
         }
 
         [Test]
+        public void MultiplyByAddDivideThrowNullReferenceExceptionIfParameterIsNull()
+        {
+            var randomFloat = new FloatNumberMatrixData((float)new Random().NextDouble());
+
+            Assert.Throws<NullReferenceException>(() => { randomFloat.MultiplyBy(null); });
+            Assert.Throws<NullReferenceException>(() => { randomFloat.Add(null); });
+            Assert.Throws<NullReferenceException>(() => { randomFloat.Divide(null); });
+        }
+        
+        [Test]
         public void ReturningCorrectResultWhenMultiplyByWithFloatNumberMatrixData()
         {
             var random = new Random();
