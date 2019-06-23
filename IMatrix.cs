@@ -43,5 +43,12 @@ namespace MatrixEssentials
         /// <param name="kernel"></param>
         /// <returns>result from multiplication</returns>
         IMatrix Convolute(IMatrix kernel);
+
+        /// <summary>
+        /// Adds matrix to current matrix
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns>addition result</returns>
+        IMatrix Add(IMatrix matrix);
     }
 }

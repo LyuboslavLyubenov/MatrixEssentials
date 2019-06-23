@@ -10,7 +10,7 @@ namespace MatrixEssentials
     /// </summary>
     public class Matrix : IMatrix
     {
-        private readonly Type _matrixDataType;
+        private readonly Type matrixDataType;
 
         /// <summary>
         /// Internal matrix structure
@@ -60,7 +60,7 @@ namespace MatrixEssentials
                 throw new ArgumentException(nameof(matrixDataType));
             }
 
-            this._matrixDataType = matrixDataType;
+            this.matrixDataType = matrixDataType;
 
             this.Width = width;
             this.Height = height;
@@ -108,6 +108,29 @@ namespace MatrixEssentials
             this.matrix[row][column] = value;
         }
 
+        public IMatrix Add(IMatrix matrix)
+        {
+            if (this.Width != matrix.Width || this.Height == matrix.Height)
+            {
+                throw new ArgumentException("Matrices must have same width and height");
+            }
+
+            var result = new Matrix(this.Width, this.Height, this.matrixDataType);
+            
+            for (int i = 0; i < matrix.Height; i++)
+            {
+                for (int j = 0; j < matrix.Width; j++)
+                {
+                    var matrixData = matrix.GetValue(j, i);
+                    var currentMatrixData = this.GetValue(j, i);
+                    var matrixDataAdditionResult = result.GetValue(j, i).Add(matrixData).Add(currentMatrixData);
+                    result.SetValue(j, i, matrixDataAdditionResult);
+                }
+            }
+
+            return result;
+        }
+
         public IMatrix Convolute(IMatrix kernel)
         {
             if (kernel == null)
@@ -142,11 +165,11 @@ namespace MatrixEssentials
         private IMatrixData CalculateValueForPosition(int row, int column, IMatrix image, IMatrix kernel,
             float kernelSum = -1)
         {
-            IMatrixData endValue = (IMatrixData) Activator.CreateInstance(this._matrixDataType);
+            IMatrixData endValue = (IMatrixData) Activator.CreateInstance(this.matrixDataType);
 
             for (var i = 0; i < kernel.Height; i++)
             {
-                IMatrixData innerCycleCalculationResult = (IMatrixData) Activator.CreateInstance(this._matrixDataType);
+                IMatrixData innerCycleCalculationResult = (IMatrixData) Activator.CreateInstance(this.matrixDataType);
 
                 for (var j = 0; j < kernel.Width; j++)
                 {
