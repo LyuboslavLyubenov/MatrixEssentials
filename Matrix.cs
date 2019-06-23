@@ -34,6 +34,7 @@ namespace MatrixEssentials
             this.Width = matrix[0].Count;
             this.Height = matrix.Count;
             this.matrix = matrix;
+            this.matrixDataType = this.matrix[0][0].GetType();
         }
 
         /// <summary>

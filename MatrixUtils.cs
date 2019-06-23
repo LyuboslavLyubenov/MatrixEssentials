@@ -19,17 +19,20 @@ namespace MatrixEssentials
             var bitmapImage = new Bitmap(imagePath);
             var width = bitmapImage.Width;
             var height = bitmapImage.Height;
-            var matrix = new RGBMatrix(width, height);
+            IList<IList<IMatrixData>> rgbValues = new List<IList<IMatrixData>>(height);
 
             for (int i = 0; i < height; i++)
             {
+                rgbValues.Add(new List<IMatrixData>(width));
+                
                 for (int j = 0; j < width; j++)
                 {
                     var pixel = bitmapImage.GetPixel(j, i);
-                    matrix.SetValue(j, i, new RGBMatrixData(pixel.R, pixel.G, pixel.B));
+                    rgbValues[i].Add(new RGBMatrixData(pixel.R, pixel.G, pixel.B));
                 }
             }
 
+            var matrix = new RGBMatrix(rgbValues);
             return matrix;
         }
 
