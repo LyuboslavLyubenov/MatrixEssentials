@@ -3,7 +3,7 @@ using System;
 namespace MatrixEssentials
 {
     /// <summary>
-    /// Matrix data object representing color
+    /// Matrix data object representing color. Its unsafe because it doesnt perform any validation on its color values (r, g, b)
     /// </summary>
     public class UnsafeRGBMatrixData : IMatrixData
     {

@@ -231,7 +231,7 @@ namespace MatrixEssentials
                     var imageColumn = column + j - 1;
                     var imageRow = row + i - 1;
 
-                    //allows bluring edges of the picture
+                    //allows bluring edges of the picture (a.k.a prevents from throwing exceptions when kernel is on the edge of the picture)
                     if (imageColumn < 0 || imageRow < 0 || imageColumn >= image.Width || imageRow >= image.Height)
                     {
                         continue;
