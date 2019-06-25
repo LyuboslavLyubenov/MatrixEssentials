@@ -12,7 +12,7 @@ namespace MatrixEssentials
         {
         }
 
-        public RGBMatrix(int width, int height) : base(width, height, typeof(RGBMatrixData))
+        public RGBMatrix(int width, int height) : base(width, height, typeof(UnsafeRGBMatrixData))
         {
         }
     }

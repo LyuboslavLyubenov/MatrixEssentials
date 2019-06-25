@@ -194,7 +194,7 @@ namespace MatrixEssentials
             }
 
             var resultMatrixSize = this.CalculateConvolutedImageDimensions(kernel);
-            var resultMatrix = new Matrix(resultMatrixSize[0], resultMatrixSize[1], typeof(RGBMatrixData));
+            var resultMatrix = new Matrix(resultMatrixSize[0], resultMatrixSize[1], typeof(UnsafeRGBMatrixData));
 
             for (var rowIndex = 0; rowIndex < resultMatrix.Height; rowIndex++)
             {

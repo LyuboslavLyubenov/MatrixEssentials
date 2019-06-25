@@ -28,7 +28,7 @@ namespace MatrixEssentials
                 for (int j = 0; j < width; j++)
                 {
                     var pixel = bitmapImage.GetPixel(j, i);
-                    rgbValues[i].Add(new RGBMatrixData(pixel.R, pixel.G, pixel.B));
+                    rgbValues[i].Add(new UnsafeRGBMatrixData(pixel.R, pixel.G, pixel.B));
                 }
             }
 
@@ -51,7 +51,7 @@ namespace MatrixEssentials
             {
                 for (int j = 0; j < width; j++)
                 {
-                    var pixel = (RGBMatrixData) matrix.GetValue(j, i);
+                    var pixel = (UnsafeRGBMatrixData) matrix.GetValue(j, i);
                     bitmap.SetPixel(j, i, Color.FromArgb(pixel.Red, pixel.Green, pixel.Blue));
                 }
             }

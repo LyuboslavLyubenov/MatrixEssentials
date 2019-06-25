@@ -5,12 +5,12 @@ namespace MatrixEssentials
     /// <summary>
     /// Matrix data object representing color
     /// </summary>
-    public class RGBMatrixData : IMatrixData
+    public class UnsafeRGBMatrixData : IMatrixData
     {
         /// <summary>
         /// Instantiates black RGBMatrixData
         /// </summary>
-        public RGBMatrixData() : this(0, 0, 0)
+        public UnsafeRGBMatrixData() : this(0, 0, 0)
         {
         }
 
@@ -20,7 +20,7 @@ namespace MatrixEssentials
         /// <param name="red">red value (from 0 to 255)</param>
         /// <param name="green">green value (from 0 to 255)</param>
         /// <param name="blue">blue value (from 0 to 255)</param>
-        public RGBMatrixData(int red, int green, int blue)
+        public UnsafeRGBMatrixData(int red, int green, int blue)
         {
             this.Green = green;
             this.Blue = blue;
@@ -33,7 +33,7 @@ namespace MatrixEssentials
 
         public object RawValue => new[] {this.Red, this.Green, this.Blue};
 
-        public IMatrixData ZeroRepresentation => new RGBMatrixData();
+        public IMatrixData ZeroRepresentation => new UnsafeRGBMatrixData();
 
         public IMatrixData MultiplyBy(IMatrixData value)
         {
@@ -41,7 +41,7 @@ namespace MatrixEssentials
             {
                 return this.MultiplyByFloat(floatNumberData);
             }
-            else if (value is RGBMatrixData rgbData)
+            else if (value is UnsafeRGBMatrixData rgbData)
             {
                 return this.MultiplyByRgb(rgbData);
             }
@@ -55,7 +55,7 @@ namespace MatrixEssentials
             {
                 return this.AddFloat(floatNumberData);
             }
-            else if (value is RGBMatrixData rgbData)
+            else if (value is UnsafeRGBMatrixData rgbData)
             {
                 return this.AddRgb(rgbData);
             }
@@ -69,7 +69,7 @@ namespace MatrixEssentials
             {
                 return this.DivideFloat(floatNumberData);
             }
-            else if (value is RGBMatrixData rgbData)
+            else if (value is UnsafeRGBMatrixData rgbData)
             {
                 return this.DivideRgb(rgbData);
             }
@@ -96,18 +96,18 @@ namespace MatrixEssentials
             var red = (int) Math.Round(this.Red * floatDataRaw);
             var green = (int) Math.Round(this.Green * floatDataRaw);
             var blue = (int) Math.Round(this.Blue * floatDataRaw);
-            return new RGBMatrixData(red, green, blue);
+            return new UnsafeRGBMatrixData(red, green, blue);
         }
 
         /// <summary>
         /// Multiplies this instance by RGBMatrixData
         /// </summary>
-        /// <param name="rgbData"></param>
+        /// <param name="unsafeRgbData"></param>
         /// <returns>Multiplication result</returns>
-        private IMatrixData MultiplyByRgb(RGBMatrixData rgbData)
+        private IMatrixData MultiplyByRgb(UnsafeRGBMatrixData unsafeRgbData)
         {
-            var rgbRawData = (int[]) rgbData.RawValue;
-            return new RGBMatrixData(this.Red * rgbRawData[0], this.Green * rgbRawData[1], this.Blue * rgbRawData[2]);
+            var rgbRawData = (int[]) unsafeRgbData.RawValue;
+            return new UnsafeRGBMatrixData(this.Red * rgbRawData[0], this.Green * rgbRawData[1], this.Blue * rgbRawData[2]);
         }
 
         /// <summary>
@@ -126,18 +126,18 @@ namespace MatrixEssentials
             green = Math.Min(green, 255);
             blue = Math.Min(blue, 255);
 
-            return new RGBMatrixData(red, green, blue);
+            return new UnsafeRGBMatrixData(red, green, blue);
         }
 
         /// <summary>
         /// Add RGBMatrixData to this instance
         /// </summary>
-        /// <param name="rgbData"></param>
+        /// <param name="unsafeRgbData"></param>
         /// <returns>Addition result</returns>
-        private IMatrixData AddRgb(RGBMatrixData rgbData)
+        private IMatrixData AddRgb(UnsafeRGBMatrixData unsafeRgbData)
         {
-            var rgbRawData = (int[]) rgbData.RawValue;
-            return new RGBMatrixData(this.Red + rgbRawData[0], this.Green + rgbRawData[1], this.Blue + rgbRawData[2]);
+            var rgbRawData = (int[]) unsafeRgbData.RawValue;
+            return new UnsafeRGBMatrixData(this.Red + rgbRawData[0], this.Green + rgbRawData[1], this.Blue + rgbRawData[2]);
         }
 
         /// <summary>
@@ -151,18 +151,18 @@ namespace MatrixEssentials
             var red = (int) Math.Round(this.Red / floatDataRaw);
             var green = (int) Math.Round(this.Green / floatDataRaw);
             var blue = (int) Math.Round(this.Blue / floatDataRaw);
-            return new RGBMatrixData(red, green, blue);
+            return new UnsafeRGBMatrixData(red, green, blue);
         }
 
         /// <summary>
         /// Divides by RGBMatrixData
         /// </summary>
-        /// <param name="rgbData"></param>
+        /// <param name="unsafeRgbData"></param>
         /// <returns>Division result</returns>
-        private IMatrixData DivideRgb(RGBMatrixData rgbData)
+        private IMatrixData DivideRgb(UnsafeRGBMatrixData unsafeRgbData)
         {
-            var rgbRawData = (int[]) rgbData.RawValue;
-            return new RGBMatrixData(this.Red / rgbRawData[0], this.Green / rgbRawData[1], this.Blue / rgbRawData[2]);
+            var rgbRawData = (int[]) unsafeRgbData.RawValue;
+            return new UnsafeRGBMatrixData(this.Red / rgbRawData[0], this.Green / rgbRawData[1], this.Blue / rgbRawData[2]);
         }
 
         public override string ToString()
@@ -172,7 +172,7 @@ namespace MatrixEssentials
 
         public int CompareTo(object obj)
         {
-            var matrixData = obj as RGBMatrixData;
+            var matrixData = obj as UnsafeRGBMatrixData;
 
             if (matrixData == null)
             {
