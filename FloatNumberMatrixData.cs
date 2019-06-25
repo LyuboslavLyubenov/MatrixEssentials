@@ -59,5 +59,17 @@ namespace MatrixEssentials
         {
             return this.InternalValue.ToString();
         }
+
+        public int CompareTo(object obj)
+        {
+            var matrixData = obj as FloatNumberMatrixData;
+
+            if (matrixData == null)
+            {
+                return 0;
+            }
+
+            return this.InternalValue.CompareTo(matrixData.InternalValue);
+        }
     }
 }

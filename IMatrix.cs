@@ -18,6 +18,11 @@ namespace MatrixEssentials
         /// Calculates sum of the matrix
         /// </summary>
         IMatrixData Sum { get; }
+        
+        /// <summary>
+        /// Returns normalized matrix
+        /// </summary>
+        IMatrix Normalized { get; }
 
         /// <summary>
         /// Gets value from certain position

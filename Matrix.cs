@@ -12,6 +12,13 @@ namespace MatrixEssentials
     {
         private readonly Type matrixDataType;
 
+        
+        #if DEBUG
+        private readonly bool isInDebugMode = true; 
+        #else
+        private readonly bool isInDebugMode = false;
+#endif
+
         /// <summary>
         /// Internal matrix structure
         /// </summary>
@@ -85,10 +92,57 @@ namespace MatrixEssentials
         public int Width { get; }
 
         public int Height { get; }
-
-
+        
         public IMatrixData Sum => this.matrix.SelectMany(number => number).ToList().Sum();
 
+        public IMatrix Normalized
+        {
+            get
+            {
+                var highestValue = this.HighestValue;
+                var result = new Matrix(this.Width, this.Height, this.matrixDataType);
+                
+                for (int i = 0; i < this.Height; i++)
+                {
+                    for (int j = 0; j < this.Width; j++)
+                    {
+                        var normalizedValue = this.matrix[i][j].Divide(highestValue);
+                        result.SetValue(j, i, normalizedValue);
+                    }
+                }
+
+                return result;
+            }
+        }
+        
+        private IMatrixData HighestValue
+        {
+            get
+            {
+                IMatrixData result = null;
+                
+                for (int i = 0; i < this.Height; i++)
+                {
+                    for (int j = 0; j < this.Width; j++)
+                    {
+                        if (result == null)
+                        {
+                            result = this.matrix[i][j];
+                            continue;
+                        }
+
+                        var comparisionResult = result.CompareTo(this.matrix[i][j]);
+                        if (comparisionResult < 0)
+                        {
+                            result = this.matrix[i][j];
+                        }
+                    }
+                }
+
+                return result;
+            }
+        }
+        
         public IMatrixData GetValue(int column, int row)
         {
             if (column >= Width || row >= Height || column < 0 || row < 0)
@@ -111,7 +165,7 @@ namespace MatrixEssentials
 
         public IMatrix Add(IMatrix matrix)
         {
-            if (this.Width != matrix.Width || this.Height == matrix.Height)
+            if (this.Width != matrix.Width || this.Height != matrix.Height)
             {
                 throw new ArgumentException("Matrices must have same width and height");
             }
@@ -190,15 +244,20 @@ namespace MatrixEssentials
 
                 endValue = endValue.Add(innerCycleCalculationResult);
             }
-
-            if (Math.Abs(kernelSum - (-1)) > 0.01)
+            
+            if (Math.Abs(kernelSum - (-1)) > 0.001f)
             {
                 return endValue.Divide(new FloatNumberMatrixData(kernelSum));
             }
-            else
+
+            var sum = (FloatNumberMatrixData)kernel.Sum;
+
+            if (Math.Abs(sum.InternalValue) > 0.001f)
             {
-                return endValue.Divide(kernel.Sum);
+                return endValue.Divide(new FloatNumberMatrixData(sum.InternalValue));
             }
+
+            return endValue.CompareTo(endValue.ZeroRepresentation) < 0 ? endValue.ZeroRepresentation : endValue;
         }
 
         /// <summary>
@@ -211,13 +270,19 @@ namespace MatrixEssentials
             return
                 new[]
                 {
-                    this.Width - kernel.Width - 1,
-                    this.Height - kernel.Height + 1
+                    this.Width,
+                    this.Height
                 };
         }
 
         public override string ToString()
         {
+            if (isInDebugMode)
+            {
+                //causes exceptions on large matrixes
+                return "";
+            }
+            
             var maxWhiteSpace = new string(' ', 10);
             var output = new StringBuilder();
 

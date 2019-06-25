@@ -22,10 +22,6 @@ namespace MatrixEssentials
         /// <param name="blue">blue value (from 0 to 255)</param>
         public RGBMatrixData(int red, int green, int blue)
         {
-            ValidateColorRange(green);
-            ValidateColorRange(blue);
-            ValidateColorRange(red);
-
             this.Green = green;
             this.Blue = blue;
             this.Red = red;
@@ -172,6 +168,19 @@ namespace MatrixEssentials
         public override string ToString()
         {
             return $"r:{this.Red} g:{this.Green} b:{this.Blue}";
+        }
+
+        public int CompareTo(object obj)
+        {
+            var matrixData = obj as RGBMatrixData;
+
+            if (matrixData == null)
+            {
+                return 0;
+            }
+
+            return matrixData.Red.CompareTo(this.Red) + matrixData.Green.CompareTo(this.Green) +
+                   matrixData.Blue.CompareTo(this.Blue);
         }
     }
 }
