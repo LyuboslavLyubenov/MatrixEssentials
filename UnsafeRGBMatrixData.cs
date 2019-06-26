@@ -170,17 +170,42 @@ namespace MatrixEssentials
             return $"r:{this.Red} g:{this.Green} b:{this.Blue}";
         }
 
+        /// <summary>
+        /// Compares this instance to another object. 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>
+        /// It have strange behaviour.
+        /// It will return 0 when not comparing with RGBMatrixData. Nothing very strange so far.
+        /// Weird things happen when is trying to compare with another RGBMatrixData.
+        /// It will return -1 if any of this instance's color values are less than comparable's color values.
+        ///
+        /// For example:
+        /// (1, 100, 1) is less than (2, 0, 0)
+        /// (2, 100, 1) is less than (0, 0, 2)
+        ///
+        /// It will return 0 if its color values are the same.
+        ///
+        /// And it will return 1 if all its values are greater than comparable's
+        /// For example:
+        /// (1, 100, 1) is greater than (0, 99, 0)
+        /// But not greater than (2, 0, 0)
+        /// </returns>
         public int CompareTo(object obj)
         {
             var matrixData = obj as UnsafeRGBMatrixData;
 
-            if (matrixData == null)
+            if (matrixData == null || (matrixData.Blue == this.Blue && matrixData.Green == this.Green && matrixData.Red == this.Red))
             {
                 return 0;
             }
 
-            return matrixData.Red.CompareTo(this.Red) + matrixData.Green.CompareTo(this.Green) +
-                   matrixData.Blue.CompareTo(this.Blue);
+            if (this.Red < matrixData.Red || this.Green < matrixData.Green || this.Blue < matrixData.Blue)
+            {
+                return -1;
+            }
+
+            return 1;
         }
     }
 }
