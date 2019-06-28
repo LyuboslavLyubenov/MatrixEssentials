@@ -40,13 +40,13 @@ namespace MatrixEssentialsTests
         }
 
         [Test]
-        public void MultiplyByAddDivideThrowNullReferenceExceptionIfParameterIsNull()
+        public void MultiplyByAddDivideThrowNotImplementedExceptionIfParameterIsNull()
         {
             var randomFloat = new FloatNumberMatrixData((float)new Random().NextDouble());
 
-            Assert.Throws<NullReferenceException>(() => { randomFloat.MultiplyBy(null); });
-            Assert.Throws<NullReferenceException>(() => { randomFloat.Add(null); });
-            Assert.Throws<NullReferenceException>(() => { randomFloat.Divide(null); });
+            Assert.Throws<NotImplementedException>(() => { randomFloat.MultiplyBy(null); });
+            Assert.Throws<NotImplementedException>(() => { randomFloat.Add(null); });
+            Assert.Throws<NotImplementedException>(() => { randomFloat.Divide(null); });
         }
         
         [Test]
@@ -112,6 +112,24 @@ namespace MatrixEssentialsTests
             AssertFloatsAreEqual(randomNumber / secondRandomNumber, (float)divisionResult.RawValue);
         }
 
+        
+        [Test]
+        public void ReturningFloatMatrixDataWithCorrectInternalValueWhenDividedByRGBMatrixDataType()
+        {
+            int red;
+            int green;
+            int blue;
+            var randomColor = Utils.GetRandomColor(out red, out green, out blue);
+            
+            var floatMatrixData = new FloatNumberMatrixData(1f);
+
+            var actual = floatMatrixData.Divide(randomColor);
+            var expected = (red + green + blue) / 3f;
+            expected = floatMatrixData.InternalValue / expected;
+            
+            AssertFloatsAreEqual(expected, (float)actual.RawValue);
+        }
+        
         [Test]
         public void ToStringReturnsFloatingNumberAsString()
         {

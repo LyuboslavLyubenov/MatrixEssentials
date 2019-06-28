@@ -47,13 +47,13 @@ namespace MatrixEssentialsTests
         }
 
         [Test]
-        public void MultiplyByAddDivideThrowNullReferenceExceptionIfParameterIsNull()
+        public void MultiplyByAddDivideThrowNotImplementedExceptionIfParameterIsNull()
         {
             var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
 
-            Assert.Throws<NullReferenceException>(() => { randomColor.MultiplyBy(null); });
-            Assert.Throws<NullReferenceException>(() => { randomColor.Add(null); });
-            Assert.Throws<NullReferenceException>(() => { randomColor.Divide(null); });
+            Assert.Throws<NotImplementedException>(() => { randomColor.MultiplyBy(null); });
+            Assert.Throws<NotImplementedException>(() => { randomColor.Add(null); });
+            Assert.Throws<NotImplementedException>(() => { randomColor.Divide(null); });
         }
         
         [Test]
