@@ -52,6 +52,20 @@ namespace MatrixEssentials
                 return new FloatNumberMatrixData(result);
             }
 
+            if (value is UnsafeRGBMatrixData unsafeRgbMatrixData)
+            {
+                if (unsafeRgbMatrixData.Blue == unsafeRgbMatrixData.Green &&
+                    unsafeRgbMatrixData.Blue == unsafeRgbMatrixData.Red)
+                {
+                    return new FloatNumberMatrixData(this.InternalValue / unsafeRgbMatrixData.Blue);
+                }
+                
+                var averageOfRGBValues =
+                    (unsafeRgbMatrixData.Blue + unsafeRgbMatrixData.Green + unsafeRgbMatrixData.Red) / 3;
+                var result = this.InternalValue / averageOfRGBValues;
+                return new FloatNumberMatrixData(result);
+            }
+            
             throw new System.NotImplementedException();
         }
 
