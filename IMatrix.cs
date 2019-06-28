@@ -15,6 +15,11 @@ namespace MatrixEssentials
         int Height { get; }
 
         /// <summary>
+        /// Returns largest IMatrixData value in this matrix instance
+        /// </summary>
+        IMatrixData HighestValue { get; }
+
+        /// <summary>
         /// Calculates sum of the matrix
         /// </summary>
         IMatrixData Sum { get; }

@@ -115,7 +115,7 @@ namespace MatrixEssentials
             }
         }
         
-        private IMatrixData HighestValue
+        public IMatrixData HighestValue
         {
             get
             {
