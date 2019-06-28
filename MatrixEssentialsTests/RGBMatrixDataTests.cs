@@ -6,20 +6,6 @@ namespace MatrixEssentialsTests
 {
     public class RGBMatrixDataTests
     {
-        private UnsafeRGBMatrixData GetRandomColor(out int red, out int green, out int blue, int redLimit = 255, int greenLimit = 255, int blueLimit = 255)
-        {
-            var randomRed = new Random().Next(0, redLimit);
-            var randomGreen = new Random().Next(0, greenLimit);
-            var randomBlue = new Random().Next(0, blueLimit);
-            var randomColor = new UnsafeRGBMatrixData(randomRed, randomGreen, randomBlue);
-
-            red = randomRed;
-            green = randomGreen;
-            blue = randomBlue;
-            
-            return randomColor;
-        }
-        
         [Test]
         public void BlueGreenRedPropertiesRepresentingCorrectValues()
         {
@@ -28,7 +14,7 @@ namespace MatrixEssentialsTests
             Assert.AreEqual(0, black.Green);
             Assert.AreEqual(0, black.Blue);
 
-            var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
+            var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
             
             Assert.AreEqual(randomRed, randomColor.Red);
             Assert.AreEqual(randomGreen, randomColor.Green);
@@ -63,7 +49,7 @@ namespace MatrixEssentialsTests
         [Test]
         public void MultiplyByAddDivideThrowNullReferenceExceptionIfParameterIsNull()
         {
-            var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
+            var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
 
             Assert.Throws<NullReferenceException>(() => { randomColor.MultiplyBy(null); });
             Assert.Throws<NullReferenceException>(() => { randomColor.Add(null); });
@@ -73,7 +59,7 @@ namespace MatrixEssentialsTests
         [Test]
         public void ReturningRGBMatrixDataWithColorChannelsMultipliedByFloatIfParameterIsFloatMatrixDataType()
         {
-            var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
+            var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
             var randomFloat = new FloatNumberMatrixData((float)new Random().NextDouble());
 
             var actual = (UnsafeRGBMatrixData)randomColor.MultiplyBy(randomFloat);
@@ -86,8 +72,8 @@ namespace MatrixEssentialsTests
         [Test]
         public void ReturningRGBMatrixDataWithColorChannelsMultipliedByOtherColorChannelIfParameterIsRGBMatrixDataType()
         {
-            var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue, 10, 10, 10);
-            var randomColor2 = GetRandomColor(out var randomRed2, out var randomGreen2, out var randomBlue2, 10, 10, 10);
+            var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue, 10, 10, 10);
+            var randomColor2 = Utils.GetRandomColor(out var randomRed2, out var randomGreen2, out var randomBlue2, 10, 10, 10);
 
             var actual = (UnsafeRGBMatrixData) randomColor.MultiplyBy(randomColor2);
             
@@ -99,7 +85,7 @@ namespace MatrixEssentialsTests
         [Test]
         public void ReturningRGBMatrixDataWithColorChannelsDividedByFloatIfParameterIsFloatMatrixDataType()
         {
-            var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
+            var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
             var randomFloat = new FloatNumberMatrixData(1f + (float)new Random().NextDouble());
 
             var actual = (UnsafeRGBMatrixData)randomColor.Divide(randomFloat);
@@ -112,8 +98,8 @@ namespace MatrixEssentialsTests
         [Test]
         public void ReturningRGBMatrixDataWithColorChannellsDividedByEachOtherIfParameterIsRGBMatrixDataType()
         {
-            var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
-            var randomColor2 = GetRandomColor(out var randomRed2, out var randomGreen2, out var randomBlue2);
+            var randomColor = Utils.GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
+            var randomColor2 = Utils.GetRandomColor(out var randomRed2, out var randomGreen2, out var randomBlue2);
 
             var actual = (UnsafeRGBMatrixData) randomColor.Divide(randomColor2);
             
@@ -121,8 +107,7 @@ namespace MatrixEssentialsTests
             Assert.AreEqual(randomGreen / randomGreen2, actual.Green);
             Assert.AreEqual(randomBlue / randomBlue2, actual.Blue);
         }
-        
-        
+
         [Test]
         public void ThrowingNotImplementedExceptionAddUnsupportedDataType()
         {
