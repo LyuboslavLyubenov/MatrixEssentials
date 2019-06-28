@@ -6,12 +6,12 @@ namespace MatrixEssentialsTests
 {
     public class RGBMatrixDataTests
     {
-        private RGBMatrixData GetRandomColor(out int red, out int green, out int blue, int redLimit = 255, int greenLimit = 255, int blueLimit = 255)
+        private UnsafeRGBMatrixData GetRandomColor(out int red, out int green, out int blue, int redLimit = 255, int greenLimit = 255, int blueLimit = 255)
         {
             var randomRed = new Random().Next(0, redLimit);
             var randomGreen = new Random().Next(0, greenLimit);
             var randomBlue = new Random().Next(0, blueLimit);
-            var randomColor = new RGBMatrixData(randomRed, randomGreen, randomBlue);
+            var randomColor = new UnsafeRGBMatrixData(randomRed, randomGreen, randomBlue);
 
             red = randomRed;
             green = randomGreen;
@@ -23,7 +23,7 @@ namespace MatrixEssentialsTests
         [Test]
         public void BlueGreenRedPropertiesRepresentingCorrectValues()
         {
-            var black = new RGBMatrixData();
+            var black = new UnsafeRGBMatrixData();
             Assert.AreEqual(0, black.Red);
             Assert.AreEqual(0, black.Green);
             Assert.AreEqual(0, black.Blue);
@@ -41,7 +41,7 @@ namespace MatrixEssentialsTests
             var randomRed = new Random().Next(0, 255);
             var randomGreen = new Random().Next(0, 255);
             var randomBlue = new Random().Next(0, 255);
-            var randomColor = new RGBMatrixData(randomRed, randomGreen, randomBlue);
+            var randomColor = new UnsafeRGBMatrixData(randomRed, randomGreen, randomBlue);
 
             var rawValues = (int[])randomColor.RawValue;
             
@@ -53,7 +53,7 @@ namespace MatrixEssentialsTests
         [Test]
         public void ZeroRepresentationIsCorrect()
         {
-            var zeroRepresentation = (RGBMatrixData)new RGBMatrixData().ZeroRepresentation;
+            var zeroRepresentation = (UnsafeRGBMatrixData)new UnsafeRGBMatrixData().ZeroRepresentation;
             
             Assert.AreEqual(0, zeroRepresentation.Red);
             Assert.AreEqual(0, zeroRepresentation.Green);
@@ -76,7 +76,7 @@ namespace MatrixEssentialsTests
             var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
             var randomFloat = new FloatNumberMatrixData((float)new Random().NextDouble());
 
-            var actual = (RGBMatrixData)randomColor.MultiplyBy(randomFloat);
+            var actual = (UnsafeRGBMatrixData)randomColor.MultiplyBy(randomFloat);
             
             Assert.AreEqual((int)Math.Round(randomRed * randomFloat.InternalValue), actual.Red);
             Assert.AreEqual((int)Math.Round(randomGreen * randomFloat.InternalValue), actual.Green);
@@ -89,7 +89,7 @@ namespace MatrixEssentialsTests
             var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue, 10, 10, 10);
             var randomColor2 = GetRandomColor(out var randomRed2, out var randomGreen2, out var randomBlue2, 10, 10, 10);
 
-            var actual = (RGBMatrixData) randomColor.MultiplyBy(randomColor2);
+            var actual = (UnsafeRGBMatrixData) randomColor.MultiplyBy(randomColor2);
             
             Assert.AreEqual(randomRed * randomRed2, actual.Red);
             Assert.AreEqual(randomGreen * randomGreen2, actual.Green);
@@ -102,7 +102,7 @@ namespace MatrixEssentialsTests
             var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
             var randomFloat = new FloatNumberMatrixData(1f + (float)new Random().NextDouble());
 
-            var actual = (RGBMatrixData)randomColor.Divide(randomFloat);
+            var actual = (UnsafeRGBMatrixData)randomColor.Divide(randomFloat);
             
             Assert.AreEqual((int)Math.Round(randomRed / randomFloat.InternalValue), actual.Red);
             Assert.AreEqual((int)Math.Round(randomGreen / randomFloat.InternalValue), actual.Green);
@@ -115,7 +115,7 @@ namespace MatrixEssentialsTests
             var randomColor = GetRandomColor(out var randomRed, out var randomGreen, out var randomBlue);
             var randomColor2 = GetRandomColor(out var randomRed2, out var randomGreen2, out var randomBlue2);
 
-            var actual = (RGBMatrixData) randomColor.Divide(randomColor2);
+            var actual = (UnsafeRGBMatrixData) randomColor.Divide(randomColor2);
             
             Assert.AreEqual(randomRed / randomRed2, actual.Red);
             Assert.AreEqual(randomGreen / randomGreen2, actual.Green);
