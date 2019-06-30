@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['floatmatrixdatatests',['FloatMatrixDataTests',['../d7/d6c/classMatrixEssentialsTests_1_1FloatMatrixDataTests.html',1,'MatrixEssentialsTests']]],
-  ['floatmatrixdatatests_2ecs',['FloatMatrixDataTests.cs',['../d2/dce/FloatMatrixDataTests_8cs.html',1,'']]],
-  ['floatnumbermatrixdata',['FloatNumberMatrixData',['../d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html',1,'MatrixEssentials.FloatNumberMatrixData'],['../d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html#a72ea99b4c04eac7dc6bc6e081ad1e2e5',1,'MatrixEssentials.FloatNumberMatrixData.FloatNumberMatrixData()'],['../d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html#a530cae38125508ab33710b123e3a0ca7',1,'MatrixEssentials.FloatNumberMatrixData.FloatNumberMatrixData(float internalValue)']]],
-  ['floatnumbermatrixdata_2ecs',['FloatNumberMatrixData.cs',['../d4/dec/FloatNumberMatrixData_8cs.html',1,'']]]
+  ['getrandomcolor',['GetRandomColor',['../d4/d6f/classMatrixEssentialsTests_1_1Utils.html#af16564e60ff44ad8e1916bf3e680f114',1,'MatrixEssentialsTests::Utils']]],
+  ['getvalue',['GetValue',['../d2/d9f/interfaceMatrixEssentials_1_1IMatrix.html#a141427ec6962e11c28140e0729046a6f',1,'MatrixEssentials.IMatrix.GetValue()'],['../de/d93/classMatrixEssentials_1_1Matrix.html#a490212c1a1789b845f33c3844537279c',1,'MatrixEssentials.Matrix.GetValue()']]],
+  ['getzerovalueformatrixtype',['GetZeroValueForMatrixType',['../d1/d11/classMatrixEssentials_1_1TypesExtensions.html#a8a8ec151a5d61717b157f6626eb369fe',1,'MatrixEssentials::TypesExtensions']]],
+  ['green',['Green',['../d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html#abb65d7ea1b14eb385b92ea4f5b595d8a',1,'MatrixEssentials::UnsafeRGBMatrixData']]]
 ];

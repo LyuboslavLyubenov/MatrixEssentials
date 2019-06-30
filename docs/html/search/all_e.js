@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['validatecolorrange',['ValidateColorRange',['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html#ad319adeab90001255db9aeec017231e7',1,'MatrixEssentials::RGBMatrixData']]]
+  ['validatecolorrange',['ValidateColorRange',['../d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html#a38e4504d9cfb03a421e7717e2d08078f',1,'MatrixEssentials::UnsafeRGBMatrixData']]]
 ];

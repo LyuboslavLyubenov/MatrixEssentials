@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$da/d9c/interfaceMatrixEssentials_1_1IMatrixData.html" title="Abstraction representing data stored in matrix " alt="" coords="5,71,196,98"/>
-<area shape="rect" id="node2" href="$d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html" title="MatrixData representing float number " alt="" coords="253,5,451,47"/>
-<area shape="rect" id="node3" href="$d6/ded/classMatrixEssentials_1_1RGBMatrixData.html" title="Matrix data object representing color " alt="" coords="244,71,460,98"/>
-<area shape="rect" id="node4" href="$dd/d05/classMatrixEssentialsTests_1_1UnknownMatrixDataType.html" title="MatrixEssentialsTests.Unknown\lMatrixDataType" alt="" coords="247,123,457,164"/>
+<area shape="rect" id="node2" href="$da/d9c/interfaceMatrixEssentials_1_1IMatrixData.html" title="Abstraction representing data stored in matrix " alt="" coords="149,101,340,127"/>
+<area shape="rect" id="node3" href="$d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html" title="MatrixData representing float number " alt="" coords="418,5,617,47"/>
+<area shape="rect" id="node4" href="$d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html" title="Matrix data object representing color. Its unsafe because it doesnt perform any validation on its col..." alt="" coords="388,71,647,98"/>
+<area shape="rect" id="node5" href="$df/d6f/classMatrixEssentialsTests_1_1MatrixTests_1_1AnotherMatrixData.html" title="MatrixEssentialsTests.Matrix\lTests.AnotherMatrixData" alt="" coords="421,123,613,164"/>
+<area shape="rect" id="node6" href="$dd/d05/classMatrixEssentialsTests_1_1UnknownMatrixDataType.html" title="MatrixEssentialsTests.Unknown\lMatrixDataType" alt="" coords="412,188,623,229"/>
 </map>

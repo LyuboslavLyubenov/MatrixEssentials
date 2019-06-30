@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['green',['Green',['../d6/ded/classMatrixEssentials_1_1RGBMatrixData.html#accd33ecddea7be2f1f981da5bd789cf2',1,'MatrixEssentials::RGBMatrixData']]]
+  ['green',['Green',['../d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html#abb65d7ea1b14eb385b92ea4f5b595d8a',1,'MatrixEssentials::UnsafeRGBMatrixData']]]
 ];

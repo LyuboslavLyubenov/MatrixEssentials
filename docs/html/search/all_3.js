@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['calculateconvolutedimagedimensions',['CalculateConvolutedImageDimensions',['../de/d93/classMatrixEssentials_1_1Matrix.html#a3c8a8ba76389eb1fdbe5b1c9232f4a71',1,'MatrixEssentials::Matrix']]],
-  ['calculatevalueforposition',['CalculateValueForPosition',['../de/d93/classMatrixEssentials_1_1Matrix.html#afb22c0c1d75c94fc0d261b6a4aaf4806',1,'MatrixEssentials::Matrix']]],
-  ['convertmatrixtorgbmatrix',['ConvertMatrixToRGBMatrix',['../d7/d48/classMatrixEssentials_1_1MatrixUtils.html#aef6b871eada93d7cf7021bbfce30e069',1,'MatrixEssentials::MatrixUtils']]],
-  ['convolute',['Convolute',['../d2/d9f/interfaceMatrixEssentials_1_1IMatrix.html#aaa20ec1ebe07bc2ae607cb61224270f4',1,'MatrixEssentials.IMatrix.Convolute()'],['../de/d93/classMatrixEssentials_1_1Matrix.html#a2020eff50fc25c0304588e79d4892fd6',1,'MatrixEssentials.Matrix.Convolute()']]],
-  ['createimagefrommatrix',['CreateImageFromMatrix',['../d7/d48/classMatrixEssentials_1_1MatrixUtils.html#a5ce13a6a11da778bc7efea56195febf9',1,'MatrixEssentials::MatrixUtils']]],
-  ['creatematrixfromimage',['CreateMatrixFromImage',['../d7/d48/classMatrixEssentials_1_1MatrixUtils.html#a856f21ced7b356429e1af87c76b279c0',1,'MatrixEssentials::MatrixUtils']]]
+  ['divide',['Divide',['../d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html#ac4f67a167d2264056b6ba39e55f1ef28',1,'MatrixEssentials.FloatNumberMatrixData.Divide()'],['../da/d9c/interfaceMatrixEssentials_1_1IMatrixData.html#ae63c4ab9083ba7a9ef6fa6bd03ffbe8e',1,'MatrixEssentials.IMatrixData.Divide()'],['../dd/d05/classMatrixEssentialsTests_1_1UnknownMatrixDataType.html#a8e469f973443d0eb2724d7690454008c',1,'MatrixEssentialsTests.UnknownMatrixDataType.Divide()'],['../df/d6f/classMatrixEssentialsTests_1_1MatrixTests_1_1AnotherMatrixData.html#aeac9b86f465a02d193ed91125d3155af',1,'MatrixEssentialsTests.MatrixTests.AnotherMatrixData.Divide()'],['../d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html#abfaf4eb384ea6ae7c7d5d977989e1b6a',1,'MatrixEssentials.UnsafeRGBMatrixData.Divide()']]],
+  ['dividefloat',['DivideFloat',['../d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html#a1bcf18f490ae737ff3f8908489dd2e3b',1,'MatrixEssentials::UnsafeRGBMatrixData']]],
+  ['dividergb',['DivideRgb',['../d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html#a949ddef83d53ff2a03b3ae73478bfbb4',1,'MatrixEssentials::UnsafeRGBMatrixData']]]
 ];
