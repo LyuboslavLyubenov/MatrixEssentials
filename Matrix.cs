@@ -30,18 +30,30 @@ namespace MatrixEssentials
         /// <param name="matrix"></param>
         /// <exception cref="ArgumentException">when matrix list is empty</exception>
         /// <exception cref="ArgumentNullException">when matrix is null</exception>
+        /// <exception cref="ArgumentException">when matrix's is containing data of different types</exception>
         public Matrix(IList<IList<IMatrixData>> matrix)
         {
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+            
             if (matrix.Count == 0)
             {
                 throw new ArgumentException("Value cannot be an empty collection.", nameof(matrix));
             }
+            
+            this.matrixDataType = matrix[0][0].GetType();
 
+            if (matrix.SelectMany(matrixData => matrixData)
+                .Any(matrixDataType => matrixDataType.GetType() != this.matrixDataType))
+            {
+                throw new ArgumentException("Inconsistent MatrixData type. all IMatrixData must be of same type");
+            }
 
             this.Width = matrix[0].Count;
             this.Height = matrix.Count;
             this.matrix = matrix;
-            this.matrixDataType = this.matrix[0][0].GetType();
         }
 
         /// <summary>
@@ -170,20 +182,22 @@ namespace MatrixEssentials
                 throw new ArgumentException("Matrices must have same width and height");
             }
 
-            var result = new Matrix(this.Width, this.Height, this.matrixDataType);
+            var matrixInternalStructure = new List<IList<IMatrixData>>();
             
             for (int i = 0; i < matrix.Height; i++)
             {
+                matrixInternalStructure.Add(new List<IMatrixData>());
+                
                 for (int j = 0; j < matrix.Width; j++)
                 {
                     var matrixData = matrix.GetValue(j, i);
                     var currentMatrixData = this.GetValue(j, i);
-                    var matrixDataAdditionResult = result.GetValue(j, i).Add(matrixData).Add(currentMatrixData);
-                    result.SetValue(j, i, matrixDataAdditionResult);
+                    var matrixDataAdditionResult = matrixData.Add(currentMatrixData);
+                    matrixInternalStructure[i].Add(matrixDataAdditionResult);
                 }
             }
 
-            return result;
+            return new Matrix(matrixInternalStructure);
         }
 
         public IMatrix Convolute(IMatrix kernel)
