@@ -20,8 +20,15 @@ namespace MatrixEssentials
 #endif
 
 
+        /// <summary>
+        /// Zero representation of IMatrixData type used in this matrix. Used for reducing Activator.CreateInstance calls
+        /// </summary>
         private IMatrixData defaultMatrixData;
-        private IMatrixData ZeroRepresentationOfMatrixData => this.defaultMatrixData.ZeroRepresentation;
+        
+        /// <summary>
+        /// Use when you need ZeroRepresentation
+        /// </summary>
+        protected IMatrixData ZeroRepresentationOfMatrixData => this.defaultMatrixData.ZeroRepresentation;
 
         /// <summary>
         /// Internal matrix structure
