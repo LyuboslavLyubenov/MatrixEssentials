@@ -19,16 +19,16 @@ namespace MatrixEssentials
             var bitmapImage = new Bitmap(imagePath);
             var width = bitmapImage.Width;
             var height = bitmapImage.Height;
-            IList<IList<IMatrixData>> rgbValues = new List<IList<IMatrixData>>(height);
+            IMatrixData[][] rgbValues = new IMatrixData[height][];
 
             for (int i = 0; i < height; i++)
             {
-                rgbValues.Add(new List<IMatrixData>(width));
+                rgbValues[i] = new IMatrixData[width];
                 
                 for (int j = 0; j < width; j++)
                 {
                     var pixel = bitmapImage.GetPixel(j, i);
-                    rgbValues[i].Add(new UnsafeRGBMatrixData(pixel.R, pixel.G, pixel.B));
+                    rgbValues[i][j] = new UnsafeRGBMatrixData(pixel.R, pixel.G, pixel.B);
                 }
             }
 
@@ -62,7 +62,7 @@ namespace MatrixEssentials
 
         public static RGBMatrix ConvertMatrixToRGBMatrix(IMatrix matrixWithRGBData)
         {
-            var rgbData = (IList<IList<IMatrixData>>) matrixWithRGBData.RawValues;
+            var rgbData = (IMatrixData[][]) matrixWithRGBData.RawValues;
             return new RGBMatrix(rgbData);
         }
     }

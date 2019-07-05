@@ -8,7 +8,7 @@ namespace MatrixEssentials
     /// </summary>
     public class RGBMatrix : Matrix
     {
-        public RGBMatrix(IList<IList<IMatrixData>> matrix) : base(matrix)
+        public RGBMatrix(IMatrixData[][] matrix) : base(matrix)
         {
         }
 

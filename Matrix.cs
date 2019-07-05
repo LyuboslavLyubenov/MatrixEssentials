@@ -19,10 +19,14 @@ namespace MatrixEssentials
         private readonly bool isInDebugMode = false;
 #endif
 
+
+        private IMatrixData defaultMatrixData;
+        private IMatrixData ZeroRepresentationOfMatrixData => this.defaultMatrixData.ZeroRepresentation;
+
         /// <summary>
         /// Internal matrix structure
         /// </summary>
-        private readonly IList<IList<IMatrixData>> matrix;
+        private readonly IMatrixData[][] matrix;
 
         /// <summary>
         /// Creates matrix object with data from nested lists
@@ -31,14 +35,14 @@ namespace MatrixEssentials
         /// <exception cref="ArgumentException">when matrix list is empty</exception>
         /// <exception cref="ArgumentNullException">when matrix is null</exception>
         /// <exception cref="ArgumentException">when matrix's is containing data of different types</exception>
-        public Matrix(IList<IList<IMatrixData>> matrix)
+        public Matrix(IMatrixData[][] matrix)
         {
             if (matrix == null)
             {
                 throw new ArgumentNullException(nameof(matrix));
             }
             
-            if (matrix.Count == 0)
+            if (matrix.GetLength(0) == 0)
             {
                 throw new ArgumentException("Value cannot be an empty collection.", nameof(matrix));
             }
@@ -51,8 +55,8 @@ namespace MatrixEssentials
                 throw new ArgumentException("Inconsistent MatrixData type. all IMatrixData must be of same type");
             }
 
-            this.Width = matrix[0].Count;
-            this.Height = matrix.Count;
+            this.Width = matrix.GetLength(0);
+            this.Height = matrix.GetLength(1);
             this.matrix = matrix;
         }
 
@@ -85,16 +89,16 @@ namespace MatrixEssentials
             this.Width = width;
             this.Height = height;
 
-            var matrixEmptyObject = (IMatrixData) Activator.CreateInstance(matrixDataType);
-            this.matrix = new List<IList<IMatrixData>>();
+            var matrixEmptyObject = ZeroRepresentationOfMatrixData;
+            this.matrix = new IMatrixData[Height][];
 
             for (int i = 0; i < Height; i++)
             {
-                this.matrix.Add(new List<IMatrixData>());
+                this.matrix[i] = new IMatrixData[Width];
 
                 for (int j = 0; j < Width; j++)
                 {
-                    this.matrix[i].Add(matrixEmptyObject);
+                    this.matrix[i][j] = matrixEmptyObject;
                 }
             }
         }
@@ -182,18 +186,18 @@ namespace MatrixEssentials
                 throw new ArgumentException("Matrices must have same width and height");
             }
 
-            var matrixInternalStructure = new List<IList<IMatrixData>>();
+            var matrixInternalStructure = new IMatrixData[Height][];
             
             for (int i = 0; i < matrix.Height; i++)
             {
-                matrixInternalStructure.Add(new List<IMatrixData>());
+                matrixInternalStructure[i] = new IMatrixData[Width];
                 
                 for (int j = 0; j < matrix.Width; j++)
                 {
                     var matrixData = matrix.GetValue(j, i);
                     var currentMatrixData = this.GetValue(j, i);
                     var matrixDataAdditionResult = matrixData.Add(currentMatrixData);
-                    matrixInternalStructure[i].Add(matrixDataAdditionResult);
+                    matrixInternalStructure[i][j] = matrixDataAdditionResult;
                 }
             }
 
@@ -234,11 +238,11 @@ namespace MatrixEssentials
         private IMatrixData CalculateValueForPosition(int row, int column, IMatrix image, IMatrix kernel,
             float kernelSum = -1)
         {
-            IMatrixData endValue = (IMatrixData) Activator.CreateInstance(this.matrixDataType);
+            IMatrixData endValue = ZeroRepresentationOfMatrixData;
 
             for (var i = 0; i < kernel.Height; i++)
             {
-                IMatrixData innerCycleCalculationResult = (IMatrixData) Activator.CreateInstance(this.matrixDataType);
+                IMatrixData innerCycleCalculationResult = ZeroRepresentationOfMatrixData;
 
                 for (var j = 0; j < kernel.Width; j++)
                 {
@@ -300,11 +304,11 @@ namespace MatrixEssentials
             var maxWhiteSpace = new string(' ', 10);
             var output = new StringBuilder();
 
-            for (var i = 0; i < this.matrix.Count; i++)
+            for (var i = 0; i < this.matrix.GetLength(0); i++)
             {
                 var matrixRow = this.matrix[i];
 
-                for (int j = 0; j < matrixRow.Count; j++)
+                for (int j = 0; j < matrixRow.GetLength(1); j++)
                 {
                     var matrixElement = matrixRow[j];
                     var matrixElementToString = matrixElement.ToString();
@@ -316,7 +320,7 @@ namespace MatrixEssentials
 
                     string whitespace = null;
 
-                    if (j == matrixRow.Count - 1)
+                    if (j == matrixRow.GetLength(1) - 1)
                     {
                         output.AppendLine(matrixElementToString);
                         continue;
