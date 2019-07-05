@@ -48,6 +48,7 @@ namespace MatrixEssentials
             }
             
             this.matrixDataType = matrix[0][0].GetType();
+            this.defaultMatrixData = (IMatrixData) Activator.CreateInstance(matrixDataType);
 
             if (matrix.SelectMany(matrixData => matrixData)
                 .Any(matrixDataType => matrixDataType.GetType() != this.matrixDataType))
@@ -85,6 +86,7 @@ namespace MatrixEssentials
             }
 
             this.matrixDataType = matrixDataType;
+            this.defaultMatrixData = (IMatrixData) Activator.CreateInstance(matrixDataType);
 
             this.Width = width;
             this.Height = height;
