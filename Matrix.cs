@@ -63,8 +63,8 @@ namespace MatrixEssentials
                 throw new ArgumentException("Inconsistent MatrixData type. all IMatrixData must be of same type");
             }
 
-            this.Width = matrix.GetLength(0);
-            this.Height = matrix.GetLength(1);
+            this.Width = matrix[0].GetLength(0);
+            this.Height = matrix.GetLength(0);
             this.matrix = matrix;
         }
 
@@ -317,7 +317,7 @@ namespace MatrixEssentials
             {
                 var matrixRow = this.matrix[i];
 
-                for (int j = 0; j < matrixRow.GetLength(1); j++)
+                for (int j = 0; j < matrixRow.GetLength(0); j++)
                 {
                     var matrixElement = matrixRow[j];
                     var matrixElementToString = matrixElement.ToString();
@@ -329,7 +329,7 @@ namespace MatrixEssentials
 
                     string whitespace = null;
 
-                    if (j == matrixRow.GetLength(1) - 1)
+                    if (j == matrixRow.GetLength(0) - 1)
                     {
                         output.AppendLine(matrixElementToString);
                         continue;
