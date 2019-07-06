@@ -41,12 +41,26 @@ namespace MatrixEssentials
             {
                 return this.MultiplyByFloat(floatNumberData);
             }
-            else if (value is UnsafeRGBMatrixData rgbData)
+            
+            if (value is UnsafeRGBMatrixData rgbData)
             {
                 return this.MultiplyByRgb(rgbData);
             }
 
+            if (value is IntegerNumberMatrixData integerNumberMatrixData)
+            {
+                return this.MultiplyByInteger(integerNumberMatrixData);
+            }
+
             throw new NotImplementedException();
+        }
+
+        private IMatrixData MultiplyByInteger(IntegerNumberMatrixData integerNumberMatrixData)
+        {
+            var red = this.Red * integerNumberMatrixData.InternalValue;
+            var green = this.Green * integerNumberMatrixData.InternalValue;
+            var blue = this.Blue * integerNumberMatrixData.InternalValue;
+            return new UnsafeRGBMatrixData(red, green, blue);
         }
 
         public IMatrixData Add(IMatrixData value)
@@ -55,12 +69,62 @@ namespace MatrixEssentials
             {
                 return this.AddFloat(floatNumberData);
             }
-            else if (value is UnsafeRGBMatrixData rgbData)
+            
+            if (value is UnsafeRGBMatrixData rgbData)
             {
                 return this.AddRgb(rgbData);
             }
 
+            if (value is IntegerNumberMatrixData integerNumberMatrixData)
+            {
+                return this.AddInteger(integerNumberMatrixData);
+            }
+            
             throw new NotImplementedException();
+        }
+
+        private IMatrixData AddInteger(IntegerNumberMatrixData integerNumberMatrixData)
+        {
+            var integerValue = integerNumberMatrixData.InternalValue;
+            var red = (int) Math.Round(this.Red + (double)integerValue);
+            var green = (int) Math.Round(this.Green + (double)integerValue);
+            var blue = (int) Math.Round(this.Blue + (double)integerValue);
+
+            red = Math.Min(red, 255);
+            green = Math.Min(green, 255);
+            blue = Math.Min(blue, 255);
+
+            return new UnsafeRGBMatrixData(red, green, blue);
+        }
+        
+        /// <summary>
+        /// Add float to this instance
+        /// </summary>
+        /// <param name="floatData"></param>
+        /// <returns>Multiplication result</returns>
+        private IMatrixData AddFloat(FloatNumberMatrixData floatData)
+        {
+            var floatDataRaw = (float) floatData.RawValue;
+            var red = (int) Math.Round(this.Red + floatDataRaw);
+            var green = (int) Math.Round(this.Green + floatDataRaw);
+            var blue = (int) Math.Round(this.Blue + floatDataRaw);
+
+            red = Math.Min(red, 255);
+            green = Math.Min(green, 255);
+            blue = Math.Min(blue, 255);
+
+            return new UnsafeRGBMatrixData(red, green, blue);
+        }
+
+        /// <summary>
+        /// Add RGBMatrixData to this instance
+        /// </summary>
+        /// <param name="unsafeRgbData"></param>
+        /// <returns>Addition result</returns>
+        private IMatrixData AddRgb(UnsafeRGBMatrixData unsafeRgbData)
+        {
+            var rgbRawData = (int[]) unsafeRgbData.RawValue;
+            return new UnsafeRGBMatrixData(this.Red + rgbRawData[0], this.Green + rgbRawData[1], this.Blue + rgbRawData[2]);
         }
 
         public IMatrixData Divide(IMatrixData value)
@@ -69,12 +133,27 @@ namespace MatrixEssentials
             {
                 return this.DivideFloat(floatNumberData);
             }
-            else if (value is UnsafeRGBMatrixData rgbData)
+            
+            if (value is UnsafeRGBMatrixData rgbData)
             {
                 return this.DivideRgb(rgbData);
             }
 
+            if (value is IntegerNumberMatrixData integerNumberMatrixData)
+            {
+                return this.DivideInteger(integerNumberMatrixData);
+            }
+            
             throw new NotImplementedException();
+        }
+
+        private IMatrixData DivideInteger(IntegerNumberMatrixData integerNumberMatrixData)
+        {
+            var floatDataRaw = integerNumberMatrixData.InternalValue;
+            var red = this.Red / floatDataRaw;
+            var green = this.Green / floatDataRaw;
+            var blue = this.Blue / floatDataRaw;
+            return new UnsafeRGBMatrixData(red, green, blue);
         }
 
         private void ValidateColorRange(int colorValue)
@@ -108,36 +187,6 @@ namespace MatrixEssentials
         {
             var rgbRawData = (int[]) unsafeRgbData.RawValue;
             return new UnsafeRGBMatrixData(this.Red * rgbRawData[0], this.Green * rgbRawData[1], this.Blue * rgbRawData[2]);
-        }
-
-        /// <summary>
-        /// Add float to this instance
-        /// </summary>
-        /// <param name="floatData"></param>
-        /// <returns>Multiplication result</returns>
-        private IMatrixData AddFloat(FloatNumberMatrixData floatData)
-        {
-            var floatDataRaw = (float) floatData.RawValue;
-            var red = (int) Math.Round(this.Red + floatDataRaw);
-            var green = (int) Math.Round(this.Green + floatDataRaw);
-            var blue = (int) Math.Round(this.Blue + floatDataRaw);
-
-            red = Math.Min(red, 255);
-            green = Math.Min(green, 255);
-            blue = Math.Min(blue, 255);
-
-            return new UnsafeRGBMatrixData(red, green, blue);
-        }
-
-        /// <summary>
-        /// Add RGBMatrixData to this instance
-        /// </summary>
-        /// <param name="unsafeRgbData"></param>
-        /// <returns>Addition result</returns>
-        private IMatrixData AddRgb(UnsafeRGBMatrixData unsafeRgbData)
-        {
-            var rgbRawData = (int[]) unsafeRgbData.RawValue;
-            return new UnsafeRGBMatrixData(this.Red + rgbRawData[0], this.Green + rgbRawData[1], this.Blue + rgbRawData[2]);
         }
 
         /// <summary>

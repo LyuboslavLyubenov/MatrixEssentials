@@ -277,11 +277,12 @@ namespace MatrixEssentials
                 return endValue.Divide(new FloatNumberMatrixData(kernelSum));
             }
 
-            var sum = (FloatNumberMatrixData)kernel.Sum;
-
-            if (Math.Abs(sum.InternalValue) > 0.001f)
+            var sum = kernel.Sum;
+            var sumValue = Convert.ToDouble(sum.RawValue);
+            
+            if (Math.Abs(sumValue) > 0.001f)
             {
-                return endValue.Divide(new FloatNumberMatrixData(sum.InternalValue));
+                return endValue.Divide(new FloatNumberMatrixData((float)sumValue));
             }
 
             return endValue.CompareTo(endValue.ZeroRepresentation) < 0 ? endValue.ZeroRepresentation : endValue;

@@ -30,6 +30,12 @@ namespace MatrixEssentials
                 return new FloatNumberMatrixData(result);
             }
 
+            if (value is IntegerNumberMatrixData integerNumberMatrixData)
+            {
+                var result = this.InternalValue * integerNumberMatrixData.InternalValue;
+                return new FloatNumberMatrixData(result);
+            }
+
             throw new NotImplementedException();
         }
 
@@ -52,6 +58,12 @@ namespace MatrixEssentials
                 return new FloatNumberMatrixData(result);
             }
 
+            if (value is IntegerNumberMatrixData integerNumberMatrixData)
+            {
+                var result = this.InternalValue / (integerNumberMatrixData.InternalValue + 0f);
+                return new FloatNumberMatrixData(result);
+            }
+            
             if (value is UnsafeRGBMatrixData unsafeRgbMatrixData)
             {
                 if (unsafeRgbMatrixData.Blue == unsafeRgbMatrixData.Green &&
