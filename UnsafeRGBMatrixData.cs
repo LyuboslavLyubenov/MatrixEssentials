@@ -15,16 +15,16 @@ namespace MatrixEssentials
         }
 
         /// <summary>
-        /// Instantiates RGBMatrixData representing pixel color
+        /// Instantiates RGBMatrixData representing pixel color. if lower than zero, will set to zero
         /// </summary>
         /// <param name="red">red value (from 0 to 255)</param>
         /// <param name="green">green value (from 0 to 255)</param>
         /// <param name="blue">blue value (from 0 to 255)</param>
         public UnsafeRGBMatrixData(int red, int green, int blue)
         {
-            this.Green = green;
-            this.Blue = blue;
-            this.Red = red;
+            this.Green = Math.Min(255, Math.Max(green, 0));
+            this.Blue = Math.Min(255, Math.Max(blue, 0));
+            this.Red = Math.Min(255, Math.Max(red, 0));
         }
 
         public int Blue { get; }
@@ -154,14 +154,6 @@ namespace MatrixEssentials
             var green = this.Green / floatDataRaw;
             var blue = this.Blue / floatDataRaw;
             return new UnsafeRGBMatrixData(red, green, blue);
-        }
-
-        private void ValidateColorRange(int colorValue)
-        {
-            if (colorValue < 0 || colorValue > 255)
-            {
-                throw new ArgumentOutOfRangeException(nameof(colorValue));
-            }
         }
 
         /// <summary>
