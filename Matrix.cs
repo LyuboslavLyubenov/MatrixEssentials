@@ -220,6 +220,7 @@ namespace MatrixEssentials
                 throw new ArgumentNullException(nameof(kernel));
             }
 
+            var kernelSum = (float)kernel.Sum.RawValue;
             var resultMatrixSize = this.CalculateConvolutedImageDimensions(kernel);
             var resultMatrix = new Matrix(resultMatrixSize[0], resultMatrixSize[1], typeof(UnsafeRGBMatrixData));
 
@@ -227,7 +228,7 @@ namespace MatrixEssentials
             {
                 for (var columnIndex = 0; columnIndex < resultMatrix.Width; columnIndex++)
                 {
-                    var newValue = CalculateValueForPosition(rowIndex, columnIndex, this, kernel);
+                    var newValue = CalculateValueForPosition(rowIndex, columnIndex, this, kernel, kernelSum);
                     resultMatrix.SetValue(columnIndex, rowIndex, newValue);
                 }
             }
