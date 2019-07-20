@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['readme_2emd',['README.md',['../da/ddd/README_8md.html',1,'']]],
-  ['rgbmatrix_2ecs',['RGBMatrix.cs',['../da/dc2/RGBMatrix_8cs.html',1,'']]],
-  ['rgbmatrixdatatests_2ecs',['RGBMatrixDataTests.cs',['../da/da0/RGBMatrixDataTests_8cs.html',1,'']]]
+  ['matrix_2ecs',['Matrix.cs',['../d8/deb/Matrix_8cs.html',1,'']]],
+  ['matrixdataextensions_2ecs',['MatrixDataExtensions.cs',['../db/d37/MatrixDataExtensions_8cs.html',1,'']]],
+  ['matrixessentials_2eassemblyinfo_2ecs',['MatrixEssentials.AssemblyInfo.cs',['../d5/d60/MatrixEssentials_8AssemblyInfo_8cs.html',1,'']]],
+  ['matrixessentialstests_2eassemblyinfo_2ecs',['MatrixEssentialsTests.AssemblyInfo.cs',['../dc/dcc/MatrixEssentialsTests_8AssemblyInfo_8cs.html',1,'']]],
+  ['matrixessentialstests_2eprogram_2ecs',['MatrixEssentialsTests.Program.cs',['../d1/d3a/MatrixEssentialsTests_8Program_8cs.html',1,'']]],
+  ['matrixtests_2ecs',['MatrixTests.cs',['../d3/daf/MatrixTests_8cs.html',1,'']]],
+  ['matrixutils_2ecs',['MatrixUtils.cs',['../df/de0/MatrixUtils_8cs.html',1,'']]]
 ];

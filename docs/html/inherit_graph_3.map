@@ -1,3 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$d6/de1/classMatrixEssentials_1_1MatrixDataExtensions.html" title="Class containing extensions for IMatrixData interface " alt="" coords="5,5,192,47"/>
+<area shape="rect" id="node2" href="$da/d9c/interfaceMatrixEssentials_1_1IMatrixData.html" title="Abstraction representing data stored in matrix " alt="" coords="149,137,340,163"/>
+<area shape="rect" id="node3" href="$d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html" title="MatrixData representing float number " alt="" coords="418,5,617,47"/>
+<area shape="rect" id="node4" href="$d0/dbb/classMatrixEssentials_1_1IntegerNumberMatrixData.html" title="MatrixEssentials.Integer\lNumberMatrixData" alt="" coords="436,71,599,112"/>
+<area shape="rect" id="node5" href="$d4/d09/classMatrixEssentials_1_1UnsafeRGBMatrixData.html" title="Matrix data object representing color. Its unsafe because it doesnt perform any validation on its col..." alt="" coords="388,137,647,163"/>
+<area shape="rect" id="node6" href="$df/d6f/classMatrixEssentialsTests_1_1MatrixTests_1_1AnotherMatrixData.html" title="MatrixEssentialsTests.Matrix\lTests.AnotherMatrixData" alt="" coords="421,188,613,229"/>
+<area shape="rect" id="node7" href="$dd/d05/classMatrixEssentialsTests_1_1UnknownMatrixDataType.html" title="MatrixEssentialsTests.Unknown\lMatrixDataType" alt="" coords="412,253,623,295"/>
 </map>

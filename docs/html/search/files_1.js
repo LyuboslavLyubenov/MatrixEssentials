@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['imatrix_2ecs',['IMatrix.cs',['../dd/d7b/IMatrix_8cs.html',1,'']]],
-  ['imatrixdata_2ecs',['IMatrixData.cs',['../d7/de7/IMatrixData_8cs.html',1,'']]]
+  ['floatmatrixdatatests_2ecs',['FloatMatrixDataTests.cs',['../d2/dce/FloatMatrixDataTests_8cs.html',1,'']]],
+  ['floatnumbermatrixdata_2ecs',['FloatNumberMatrixData.cs',['../d4/dec/FloatNumberMatrixData_8cs.html',1,'']]]
 ];

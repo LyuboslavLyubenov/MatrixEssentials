@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['imatrix',['IMatrix',['../d2/d9f/interfaceMatrixEssentials_1_1IMatrix.html',1,'MatrixEssentials']]],
-  ['imatrixdata',['IMatrixData',['../da/d9c/interfaceMatrixEssentials_1_1IMatrixData.html',1,'MatrixEssentials']]]
+  ['floatmatrixdatatests',['FloatMatrixDataTests',['../d7/d6c/classMatrixEssentialsTests_1_1FloatMatrixDataTests.html',1,'MatrixEssentialsTests']]],
+  ['floatnumbermatrixdata',['FloatNumberMatrixData',['../d9/d86/classMatrixEssentials_1_1FloatNumberMatrixData.html',1,'MatrixEssentials']]]
 ];

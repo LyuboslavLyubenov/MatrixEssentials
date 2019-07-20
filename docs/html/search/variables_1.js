@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['matrix',['matrix',['../de/d93/classMatrixEssentials_1_1Matrix.html#a6cbcbac2fafa439872938d289ce045cf',1,'MatrixEssentials::Matrix']]],
-  ['matrixdatatype',['matrixDataType',['../de/d93/classMatrixEssentials_1_1Matrix.html#a21721dcca9767b8e6070b9ddebcc6e22',1,'MatrixEssentials::Matrix']]]
+  ['isindebugmode',['isInDebugMode',['../de/d93/classMatrixEssentials_1_1Matrix.html#a3b75640cc07e12f9b2c9194521a900ad',1,'MatrixEssentials::Matrix']]]
 ];
