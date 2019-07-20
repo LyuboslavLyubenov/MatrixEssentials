@@ -220,7 +220,7 @@ namespace MatrixEssentials
                 throw new ArgumentNullException(nameof(kernel));
             }
 
-            var kernelSum = (float)kernel.Sum.RawValue;
+            var kernelSum = (float)Convert.ToDouble(kernel.Sum.RawValue);
             var resultMatrixSize = this.CalculateConvolutedImageDimensions(kernel);
             var resultMatrix = new Matrix(resultMatrixSize[0], resultMatrixSize[1], typeof(UnsafeRGBMatrixData));
 
@@ -275,6 +275,11 @@ namespace MatrixEssentials
             
             if (Math.Abs(kernelSum - (-1)) > 0.001f)
             {
+                if (Math.Abs(kernelSum) < 0.001f)
+                {
+                    return endValue.CompareTo(endValue.ZeroRepresentation) < 0 ? endValue.ZeroRepresentation : endValue;
+                }
+                
                 return endValue.Divide(new FloatNumberMatrixData(kernelSum));
             }
 

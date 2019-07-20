@@ -16,21 +16,6 @@ namespace MatrixEssentials
         {
         }
 
-        private int LimitRGBValue(int value)
-        {
-            if (value < 0)
-            {
-                return 0;
-            }
-
-            if (value > 255)
-            {
-                return 255;
-            }
-
-            return value;
-        }
-
         /// <summary>
         /// Instantiates RGBMatrixData representing pixel color. if lower than zero, will set to zero
         /// </summary>
@@ -39,9 +24,9 @@ namespace MatrixEssentials
         /// <param name="blue">blue value (from 0 to 255)</param>
         public UnsafeRGBMatrixData(int red, int green, int blue)
         {
-            this.Green = LimitRGBValue(green);
-            this.Blue = LimitRGBValue(blue);
-            this.Red = LimitRGBValue(red);
+            this.Green = green;
+            this.Blue = blue;
+            this.Red = red;
         }
 
         public int Blue
@@ -62,7 +47,7 @@ namespace MatrixEssentials
             set => this.rawValues[0] = value;
         }
 
-        public object RawValue => new[] {this.Red, this.Green, this.Blue};
+        public object RawValue => rawValues;
 
         public IMatrixData ZeroRepresentation => new UnsafeRGBMatrixData();
 
