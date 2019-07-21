@@ -55,7 +55,7 @@ namespace MatrixEssentials
                     var safeRedValue = ConvertColorValueToSafeValue(pixel.Red);
                     var safeGreenValue = ConvertColorValueToSafeValue(pixel.Green);
                     var safeBlueValue = ConvertColorValueToSafeValue(pixel.Blue);
-                    bitmap.SetPixel(j, i, Color.FromArgb(pixel.Red, pixel.Green, pixel.Blue));
+                    bitmap.SetPixel(j, i, Color.FromArgb(safeRedValue, safeGreenValue, safeBlueValue));
                 }
             }
 
