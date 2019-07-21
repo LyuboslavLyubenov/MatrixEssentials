@@ -139,8 +139,7 @@ namespace MatrixEssentials
         /// <returns>Addition result</returns>
         private IMatrixData AddRgb(UnsafeRGBMatrixData unsafeRgbData)
         {
-            var rgbRawData = (int[]) unsafeRgbData.RawValue;
-            return new UnsafeRGBMatrixData(this.Red + rgbRawData[0], this.Green + rgbRawData[1], this.Blue + rgbRawData[2]);
+            return new UnsafeRGBMatrixData(this.Red + unsafeRgbData.Red, this.Green + unsafeRgbData.Green, this.Blue + unsafeRgbData.Blue);
         }
 
         public IMatrixData Divide(IMatrixData value)
@@ -193,8 +192,7 @@ namespace MatrixEssentials
         /// <returns>Multiplication result</returns>
         private IMatrixData MultiplyByRgb(UnsafeRGBMatrixData unsafeRgbData)
         {
-            var rgbRawData = (int[]) unsafeRgbData.RawValue;
-            return new UnsafeRGBMatrixData(this.Red * rgbRawData[0], this.Green * rgbRawData[1], this.Blue * rgbRawData[2]);
+            return new UnsafeRGBMatrixData(this.Red * unsafeRgbData.Red, this.Green * unsafeRgbData.Green, this.Blue * unsafeRgbData.Blue);
         }
 
         /// <summary>
@@ -218,8 +216,7 @@ namespace MatrixEssentials
         /// <returns>Division result</returns>
         private IMatrixData DivideRgb(UnsafeRGBMatrixData unsafeRgbData)
         {
-            var rgbRawData = (int[]) unsafeRgbData.RawValue;
-            return new UnsafeRGBMatrixData(this.Red / rgbRawData[0], this.Green / rgbRawData[1], this.Blue / rgbRawData[2]);
+            return new UnsafeRGBMatrixData(this.Red / unsafeRgbData.Red, this.Green / unsafeRgbData.Green, this.Blue / unsafeRgbData.Blue);
         }
 
         public override string ToString()

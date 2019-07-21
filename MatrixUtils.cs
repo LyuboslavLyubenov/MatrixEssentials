@@ -52,12 +52,30 @@ namespace MatrixEssentials
                 for (int j = 0; j < width; j++)
                 {
                     var pixel = (UnsafeRGBMatrixData) matrix.GetValue(j, i);
+                    var safeRedValue = ConvertColorValueToSafeValue(pixel.Red);
+                    var safeGreenValue = ConvertColorValueToSafeValue(pixel.Green);
+                    var safeBlueValue = ConvertColorValueToSafeValue(pixel.Blue);
                     bitmap.SetPixel(j, i, Color.FromArgb(pixel.Red, pixel.Green, pixel.Blue));
                 }
             }
 
             bitmap.Save(outputPath);
             bitmap.Dispose();
+        }
+
+        private static int ConvertColorValueToSafeValue(int colorValue)
+        {
+            if (colorValue > 255)
+            {
+                return 255;
+            }
+
+            if (colorValue < 0)
+            {
+                return 0;
+            }
+
+            return colorValue;
         }
 
         public static RGBMatrix ConvertMatrixToRGBMatrix(IMatrix matrixWithRGBData)
