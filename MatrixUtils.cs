@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MatrixEssentials
 {
@@ -35,7 +37,7 @@ namespace MatrixEssentials
             var matrix = new RGBMatrix(rgbValues);
             return matrix;
         }
-
+        
         /// <summary>
         /// Create image from RGBMatrix
         /// </summary>
@@ -63,6 +65,28 @@ namespace MatrixEssentials
             bitmap.Dispose();
         }
 
+        public static void CreateImageFromMatrixParalleled(RGBMatrix matrix, string outputPath)
+        {
+            var width = matrix.Width;
+            var height = matrix.Height;
+            var bitmap = new Bitmap(width, height);
+
+            Parallel.For(0, height, (int i) =>
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    var pixel = (UnsafeRGBMatrixData) matrix.GetValue(j, i);
+                    var safeRedValue = ConvertColorValueToSafeValue(pixel.Red);
+                    var safeGreenValue = ConvertColorValueToSafeValue(pixel.Green);
+                    var safeBlueValue = ConvertColorValueToSafeValue(pixel.Blue);
+                    bitmap.SetPixel(j, i, Color.FromArgb(safeRedValue, safeGreenValue, safeBlueValue));
+                }
+            });
+            
+            bitmap.Save(outputPath);
+            bitmap.Dispose();
+        }
+        
         private static int ConvertColorValueToSafeValue(int colorValue)
         {
             if (colorValue > 255)
