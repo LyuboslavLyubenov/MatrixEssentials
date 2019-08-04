@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using SkiaSharp;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace MatrixEssentials
@@ -18,7 +18,7 @@ namespace MatrixEssentials
         /// <returns>Matrix containing image data</returns>
         public static IMatrix CreateMatrixFromImage(string imagePath)
         {
-            var bitmapImage = new Bitmap(imagePath);
+            var bitmapImage = SKBitmap.Decode(imagePath);
             var width = bitmapImage.Width;
             var height = bitmapImage.Height;
             IMatrixData[][] rgbValues = new IMatrixData[height][];
@@ -30,7 +30,7 @@ namespace MatrixEssentials
                 for (int j = 0; j < width; j++)
                 {
                     var pixel = bitmapImage.GetPixel(j, i);
-                    rgbValues[i][j] = new UnsafeRGBMatrixData(pixel.R, pixel.G, pixel.B);
+                    rgbValues[i][j] = new UnsafeRGBMatrixData(pixel.Red, pixel.Green, pixel.Blue);
                 }
             }
 
@@ -47,7 +47,7 @@ namespace MatrixEssentials
         {
             var width = matrix.Width;
             var height = matrix.Height;
-            var bitmap = new Bitmap(width, height);
+            var bitmap = new SKBitmap(width, height);
 
             for (int i = 0; i < height; i++)
             {
@@ -57,19 +57,23 @@ namespace MatrixEssentials
                     var safeRedValue = ConvertColorValueToSafeValue(pixel.Red);
                     var safeGreenValue = ConvertColorValueToSafeValue(pixel.Green);
                     var safeBlueValue = ConvertColorValueToSafeValue(pixel.Blue);
-                    bitmap.SetPixel(j, i, Color.FromArgb(safeRedValue, safeGreenValue, safeBlueValue));
+                    var color = new SKColor((byte)safeRedValue, (byte)safeGreenValue, (byte)safeBlueValue);
+                    bitmap.SetPixel(j, i, color);
                 }
             }
 
-            bitmap.Save(outputPath);
-            bitmap.Dispose();
+            var bitmapData = SKImage.FromBitmap(bitmap).Encode(SKEncodedImageFormat.Jpeg, 80);
+            using (var stream = File.OpenWrite(outputPath))
+            {
+                bitmapData.SaveTo(stream);
+            }
         }
 
         public static void CreateImageFromMatrixParalleled(RGBMatrix matrix, string outputPath)
         {
             var width = matrix.Width;
             var height = matrix.Height;
-            var bitmap = new Bitmap(width, height);
+            var bitmap = new SKBitmap(width, height);
 
             Parallel.For(0, height, (int i) =>
             {
@@ -79,12 +83,16 @@ namespace MatrixEssentials
                     var safeRedValue = ConvertColorValueToSafeValue(pixel.Red);
                     var safeGreenValue = ConvertColorValueToSafeValue(pixel.Green);
                     var safeBlueValue = ConvertColorValueToSafeValue(pixel.Blue);
-                    bitmap.SetPixel(j, i, Color.FromArgb(safeRedValue, safeGreenValue, safeBlueValue));
+                    var color = new SKColor((byte)safeRedValue, (byte)safeGreenValue, (byte)safeBlueValue);
+                    bitmap.SetPixel(j, i, color);
                 }
             });
-            
-            bitmap.Save(outputPath);
-            bitmap.Dispose();
+
+            var bitmapData = SKImage.FromBitmap(bitmap).Encode(SKEncodedImageFormat.Jpeg, 80);
+            using (var stream = File.OpenWrite(outputPath))
+            {
+                bitmapData.SaveTo(stream);
+            }
         }
         
         private static int ConvertColorValueToSafeValue(int colorValue)
