@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MatrixEssentials
 {
@@ -232,6 +233,29 @@ namespace MatrixEssentials
                     resultMatrix.SetValue(columnIndex, rowIndex, newValue);
                 }
             }
+
+            return resultMatrix;
+        }
+
+        public IMatrix ConvoluteParalleled(IMatrix kernel)
+        {
+            if (kernel == null)
+            {
+                throw new ArgumentNullException(nameof(kernel));
+            }
+
+            var kernelSum = (float)Convert.ToDouble(kernel.Sum.RawValue);
+            var resultMatrixSize = this.CalculateConvolutedImageDimensions(kernel);
+            var resultMatrix = new Matrix(resultMatrixSize[0], resultMatrixSize[1], typeof(UnsafeRGBMatrixData));
+
+            Parallel.For(0, resultMatrix.Height, (rowIndex) =>
+            {
+                for (var columnIndex = 0; columnIndex < resultMatrix.Width; columnIndex++)
+                {
+                    var newValue = CalculateValueForPosition(rowIndex, columnIndex, this, kernel, kernelSum);
+                    resultMatrix.SetValue(columnIndex, rowIndex, newValue);
+                }
+            });
 
             return resultMatrix;
         }

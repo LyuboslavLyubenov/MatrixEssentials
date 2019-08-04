@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace MatrixEssentials
 {
     public interface IMatrix
@@ -54,6 +57,8 @@ namespace MatrixEssentials
         /// <returns>result from multiplication</returns>
         IMatrix Convolute(IMatrix kernel);
 
+        IMatrix ConvoluteParalleled(IMatrix kernel);
+        
         /// <summary>
         /// Adds matrix to current matrix
         /// </summary>
