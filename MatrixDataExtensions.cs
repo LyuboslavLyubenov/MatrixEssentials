@@ -1,3 +1,5 @@
+using MatrixEssentials.Arithmetics;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -22,14 +24,37 @@ namespace MatrixEssentials
             }
 
             var endResult = collection[0];
+            var arithmeticsController = endResult.GetArithmeticsController();
 
             for (var i = 1; i < collection.Count; i++)
             {
                 var matrixData = collection[i];
-                endResult = endResult.Add(matrixData);
+                endResult = arithmeticsController.Add(endResult, matrixData);
             }
 
             return endResult;
+        }
+
+        public static IArithmeticsController GetArithmeticsController(this IMatrixData matrixData)
+        {
+            var matrixDataType = matrixData.GetType();
+
+            if (matrixDataType == typeof(UnsafeRGBMatrixData))
+            {
+                return new UnsafeRGBMatrixDataArithmetics();
+            }
+
+            if (matrixDataType == typeof(IntegerNumberMatrixData))
+            {
+                return new IntegerNumberMatrixDataArithmetics();
+            }
+
+            if (matrixDataType == typeof(FloatNumberMatrixData))
+            {
+                return new FloatNumberMatrixDataArithmetics();
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

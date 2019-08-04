@@ -3,19 +3,28 @@ using System;
 namespace MatrixEssentials
 {
     /// <summary>
-    /// Matrix data object representing color. Its unsafe because it doesnt perform any validation on its color values (r, g, b)
+    /// Object representing UnsafeRGBMatrixData raw values. Produced from UnsafeRGBMatrixData.RawValue property
     /// </summary>
-    public class UnsafeRGBMatrixData : IMatrixData
+    public struct UnsafeRGBMatrixDataRawValues
     {
-        private int[] rawValues = new int[3];
+        public int Red { get; set; }
+        public int Green { get; set; }
+        public int Blue { get; set; }
 
-        /// <summary>
-        /// Instantiates black RGBMatrixData
-        /// </summary>
-        public UnsafeRGBMatrixData() : this(0, 0, 0)
+        public UnsafeRGBMatrixDataRawValues(int red, int green, int blue)
         {
+            this.Red = red;
+            this.Green = green;
+            this.Blue = blue;
         }
 
+    }
+
+    /// <summary>
+    /// Matrix data object representing color. Its unsafe because it doesnt perform any validation on its color values (r, g, b)
+    /// </summary>
+    public struct UnsafeRGBMatrixData : IMatrixData
+    {
         /// <summary>
         /// Instantiates RGBMatrixData representing pixel color. if lower than zero, will set to zero
         /// </summary>
@@ -31,193 +40,25 @@ namespace MatrixEssentials
 
         public int Blue
         {
-            get => this.rawValues[2];
-            set => this.rawValues[2] = value;
+            get;
+            set;
         }
 
         public int Green
         {
-            get => this.rawValues[1];
-            set => this.rawValues[1] = value;
+            get;
+            set;
         }
 
         public int Red
         {
-            get => this.rawValues[0];
-            set => this.rawValues[0] = value;
+            get;
+            set;
         }
 
-        public object RawValue => rawValues;
+        public object RawValue => new UnsafeRGBMatrixDataRawValues(this.Red, this.Green, this.Blue);
 
         public IMatrixData ZeroRepresentation => new UnsafeRGBMatrixData();
-
-        public IMatrixData MultiplyBy(IMatrixData value)
-        {
-            if (value is FloatNumberMatrixData floatNumberData)
-            {
-                return this.MultiplyByFloat(floatNumberData);
-            }
-            
-            if (value is UnsafeRGBMatrixData rgbData)
-            {
-                return this.MultiplyByRgb(rgbData);
-            }
-
-            if (value is IntegerNumberMatrixData integerNumberMatrixData)
-            {
-                return this.MultiplyByInteger(integerNumberMatrixData);
-            }
-
-            throw new NotImplementedException();
-        }
-
-        private IMatrixData MultiplyByInteger(IntegerNumberMatrixData integerNumberMatrixData)
-        {
-            var red = this.Red * integerNumberMatrixData.InternalValue;
-            var green = this.Green * integerNumberMatrixData.InternalValue;
-            var blue = this.Blue * integerNumberMatrixData.InternalValue;
-            return new UnsafeRGBMatrixData(red, green, blue);
-        }
-
-        public IMatrixData Add(IMatrixData value)
-        {
-            if (value is FloatNumberMatrixData floatNumberData)
-            {
-                return this.AddFloat(floatNumberData);
-            }
-            
-            if (value is UnsafeRGBMatrixData rgbData)
-            {
-                return this.AddRgb(rgbData);
-            }
-
-            if (value is IntegerNumberMatrixData integerNumberMatrixData)
-            {
-                return this.AddInteger(integerNumberMatrixData);
-            }
-            
-            throw new NotImplementedException();
-        }
-
-        private IMatrixData AddInteger(IntegerNumberMatrixData integerNumberMatrixData)
-        {
-            var integerValue = integerNumberMatrixData.InternalValue;
-            var red = this.Red + integerValue;
-            var green = this.Green + integerValue;
-            var blue = this.Blue + integerValue;
-
-            red = red > 255 ? 255 : red;
-            green = green > 255 ? 255 : green;
-            blue = blue > 255 ? 255 : blue;
-
-            return new UnsafeRGBMatrixData(red, green, blue);
-        }
-        
-        /// <summary>
-        /// Add float to this instance
-        /// </summary>
-        /// <param name="floatData"></param>
-        /// <returns>Multiplication result</returns>
-        private IMatrixData AddFloat(FloatNumberMatrixData floatData)
-        {
-            var floatDataRaw = floatData.InternalValue;
-            var red = this.Red + floatDataRaw;
-            var green = this.Green + floatDataRaw;
-            var blue = this.Blue + floatDataRaw;
-
-            red = red > 255 ? 255 : red;
-            green = green > 255 ? 255 : green;
-            blue = blue > 255 ? 255 : blue;
-
-            return new UnsafeRGBMatrixData((int)red, (int)green, (int)blue);
-        }
-
-        /// <summary>
-        /// Add RGBMatrixData to this instance
-        /// </summary>
-        /// <param name="unsafeRgbData"></param>
-        /// <returns>Addition result</returns>
-        private IMatrixData AddRgb(UnsafeRGBMatrixData unsafeRgbData)
-        {
-            return new UnsafeRGBMatrixData(this.Red + unsafeRgbData.Red, this.Green + unsafeRgbData.Green, this.Blue + unsafeRgbData.Blue);
-        }
-
-        public IMatrixData Divide(IMatrixData value)
-        {
-            if (value is FloatNumberMatrixData floatNumberData)
-            {
-                return this.DivideFloat(floatNumberData);
-            }
-            
-            if (value is UnsafeRGBMatrixData rgbData)
-            {
-                return this.DivideRgb(rgbData);
-            }
-
-            if (value is IntegerNumberMatrixData integerNumberMatrixData)
-            {
-                return this.DivideInteger(integerNumberMatrixData);
-            }
-            
-            throw new NotImplementedException();
-        }
-
-        private IMatrixData DivideInteger(IntegerNumberMatrixData integerNumberMatrixData)
-        {
-            var floatDataRaw = integerNumberMatrixData.InternalValue;
-            var red = this.Red / floatDataRaw;
-            var green = this.Green / floatDataRaw;
-            var blue = this.Blue / floatDataRaw;
-            return new UnsafeRGBMatrixData(red, green, blue);
-        }
-
-        /// <summary>
-        /// Multiplies this instance by float
-        /// </summary>
-        /// <param name="floatData"></param>
-        /// <returns>Multiplication result</returns>
-        private IMatrixData MultiplyByFloat(FloatNumberMatrixData floatData)
-        {
-            var floatDataRaw = floatData.InternalValue;
-            var red = this.Red * floatDataRaw;
-            var green = this.Green * floatDataRaw;
-            var blue = this.Blue * floatDataRaw;
-            return new UnsafeRGBMatrixData((int)red, (int)green, (int)blue);
-        }
-
-        /// <summary>
-        /// Multiplies this instance by RGBMatrixData
-        /// </summary>
-        /// <param name="unsafeRgbData"></param>
-        /// <returns>Multiplication result</returns>
-        private IMatrixData MultiplyByRgb(UnsafeRGBMatrixData unsafeRgbData)
-        {
-            return new UnsafeRGBMatrixData(this.Red * unsafeRgbData.Red, this.Green * unsafeRgbData.Green, this.Blue * unsafeRgbData.Blue);
-        }
-
-        /// <summary>
-        /// Divides by float
-        /// </summary>
-        /// <param name="floatData"></param>
-        /// <returns>Division result</returns>
-        private IMatrixData DivideFloat(FloatNumberMatrixData floatData)
-        {
-            var floatDataRaw = floatData.InternalValue;
-            var red = this.Red / floatDataRaw;
-            var green = this.Green / floatDataRaw;
-            var blue = this.Blue / floatDataRaw;
-            return new UnsafeRGBMatrixData((int)red, (int)green, (int)blue);
-        }
-
-        /// <summary>
-        /// Divides by RGBMatrixData
-        /// </summary>
-        /// <param name="unsafeRgbData"></param>
-        /// <returns>Division result</returns>
-        private IMatrixData DivideRgb(UnsafeRGBMatrixData unsafeRgbData)
-        {
-            return new UnsafeRGBMatrixData(this.Red / unsafeRgbData.Red, this.Green / unsafeRgbData.Green, this.Blue / unsafeRgbData.Blue);
-        }
 
         public override string ToString()
         {
@@ -247,9 +88,14 @@ namespace MatrixEssentials
         /// </returns>
         public int CompareTo(object obj)
         {
-            var matrixData = obj as UnsafeRGBMatrixData;
+            if (obj.GetType() != this.GetType())
+            {
+                return 0;
+            }
 
-            if (matrixData == null || (matrixData.Blue == this.Blue && matrixData.Green == this.Green && matrixData.Red == this.Red))
+            var matrixData = (UnsafeRGBMatrixData)obj;
+
+            if (matrixData.Blue == this.Blue && matrixData.Green == this.Green && matrixData.Red == this.Red)
             {
                 return 0;
             }
