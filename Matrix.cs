@@ -1,3 +1,4 @@
+using MatrixEssentials.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,9 @@ namespace MatrixEssentials
         /// </summary>
         private readonly IMatrixData[][] matrix;
 
+
+        private IArithmeticsController arithmeticsController;
+
         /// <summary>
         /// Creates matrix object with data from nested lists
         /// </summary>
@@ -57,6 +61,7 @@ namespace MatrixEssentials
             
             this.matrixDataType = matrix[0][0].GetType();
             this.defaultMatrixData = (IMatrixData) Activator.CreateInstance(matrixDataType);
+            this.arithmeticsController = defaultMatrixData.GetArithmeticsController();
 
             if (matrix.SelectMany(matrixData => matrixData)
                 .Any(matrixDataType => matrixDataType.GetType() != this.matrixDataType))
@@ -132,7 +137,7 @@ namespace MatrixEssentials
                 {
                     for (int j = 0; j < this.Width; j++)
                     {
-                        var normalizedValue = this.matrix[i][j].Divide(highestValue);
+                        var normalizedValue = this.arithmeticsController.Divide(this.matrix[i][j], highestValue);
                         result.SetValue(j, i, normalizedValue);
                     }
                 }
@@ -206,7 +211,7 @@ namespace MatrixEssentials
                 {
                     var matrixData = matrix.GetValue(j, i);
                     var currentMatrixData = this.GetValue(j, i);
-                    var matrixDataAdditionResult = matrixData.Add(currentMatrixData);
+                    var matrixDataAdditionResult = arithmeticsController.Add(matrixData, currentMatrixData);
                     matrixInternalStructure[i][j] = matrixDataAdditionResult;
                 }
             }
@@ -289,12 +294,13 @@ namespace MatrixEssentials
                         continue;
                     }
 
-                    innerCycleCalculationResult =
-                        innerCycleCalculationResult.Add(image.GetValue(imageColumn, imageRow)
-                            .MultiplyBy(kernel.GetValue(j, i)));
+                    var imageValue = image.GetValue(imageColumn, imageRow);
+                    var kernelValue = kernel.GetValue(j, i);
+                    var imageValueMultipliedByKernelValue = this.arithmeticsController.Multiply(imageValue, kernelValue);
+                    innerCycleCalculationResult = this.arithmeticsController.Add(innerCycleCalculationResult, imageValueMultipliedByKernelValue);
                 }
 
-                endValue = endValue.Add(innerCycleCalculationResult);
+                endValue = this.arithmeticsController.Add(endValue, innerCycleCalculationResult);
             }
             
             if (Math.Abs(kernelSum - (-1)) > 0.001f)
@@ -303,8 +309,8 @@ namespace MatrixEssentials
                 {
                     return endValue.CompareTo(endValue.ZeroRepresentation) < 0 ? endValue.ZeroRepresentation : endValue;
                 }
-                
-                return endValue.Divide(new FloatNumberMatrixData(kernelSum));
+
+                return this.arithmeticsController.Divide(endValue, new FloatNumberMatrixData(kernelSum));
             }
 
             var sum = kernel.Sum;
@@ -312,7 +318,7 @@ namespace MatrixEssentials
             
             if (Math.Abs(sumValue) > 0.001f)
             {
-                return endValue.Divide(new FloatNumberMatrixData((float)sumValue));
+                return this.arithmeticsController.Divide(endValue, new FloatNumberMatrixData((float)sumValue));
             }
 
             return endValue.CompareTo(endValue.ZeroRepresentation) < 0 ? endValue.ZeroRepresentation : endValue;
