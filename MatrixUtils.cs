@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace MatrixEssentials
 {
+    /// <summary>
+    /// Utility methods for IMatrix interface
+    /// </summary>
     public class MatrixUtils
     {
         MatrixUtils()
