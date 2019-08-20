@@ -42,7 +42,7 @@ namespace MatrixEssentials
         /// Create image from RGBMatrix
         /// </summary>
         /// <param name="matrix"></param>
-        /// <param name="outputPath">destination image path</param>
+        /// <param name="outputPath">output image path</param>
         public static void CreateImageFromMatrix(RGBMatrix matrix, string outputPath)
         {
             var width = matrix.Width;
@@ -65,6 +65,11 @@ namespace MatrixEssentials
             bitmap.Dispose();
         }
 
+        /// <summary>
+        /// Creates image from matrix (using parallel.for)
+        /// </summary>
+        /// <param name="matrix">input RGBMatrix</param>
+        /// <param name="outputPath">output image path</param>
         public static void CreateImageFromMatrixParalleled(RGBMatrix matrix, string outputPath)
         {
             var width = matrix.Width;
@@ -102,6 +107,11 @@ namespace MatrixEssentials
             return colorValue;
         }
 
+        /// <summary>
+        /// Converts IMatrix to RGB matrix 
+        /// </summary>
+        /// <param name="matrixWithRGBData"></param>
+        /// <returns>RGBMatrix</returns>
         public static RGBMatrix ConvertMatrixToRGBMatrix(IMatrix matrixWithRGBData)
         {
             var rgbData = (IMatrixData[][]) matrixWithRGBData.RawValues;
